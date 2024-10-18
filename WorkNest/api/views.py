@@ -674,3 +674,39 @@ class ListSavedCandidatesView(APIView):
 
         saved_candidates = SavedCandidate.objects.filter(job_post=job_post)
         return Response(SavedCandidateSerializer(saved_candidates, many=True).data)
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+import environ
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+class ContactFormView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ContactSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            serializer.save()
+
+            # Send email
+            user_name = serializer.data.get('user_name')
+            email = serializer.data.get('email')
+            message = serializer.data.get('message')
+            print(env('EMAIL_HOST_USER'),'nimesh', env('EMAIL_HOST_PASSWORD'))
+            
+            subject = f"New Contact Form Submission from {user_name}"
+            email_message = f"Name: {user_name}\nEmail: {email}\nMessage: {message}"
+            recipient_list = [settings.EMAIL_HOST_USER]
+            
+            send_mail(subject, email_message, settings.EMAIL_HOST_USER, recipient_list)
+            
+            return Response({"message": "Contact form submitted successfully!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    

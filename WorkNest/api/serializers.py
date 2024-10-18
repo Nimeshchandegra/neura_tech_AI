@@ -44,3 +44,10 @@ class SavedCandidateSerializer(serializers.ModelSerializer):
     class Meta:
         model = SavedCandidate
         fields = '__all__'
+
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ['user_name', 'email', 'message']

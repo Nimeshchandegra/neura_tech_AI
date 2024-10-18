@@ -189,3 +189,12 @@ class SavedCandidate(models.Model):
         unique_together = ('recruiter', 'candidate')  # Prevent saving the same candidate more than once
         db_table = 'saved_candidates'
 
+
+
+class Contact(models.Model):
+    user_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    class Meta:
+        db_table = 'contact'

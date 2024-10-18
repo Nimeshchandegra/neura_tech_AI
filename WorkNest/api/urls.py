@@ -56,5 +56,6 @@ urlpatterns = [
     path('saved_jobs/<int:candidate_id>/', ListSavedJobsView.as_view(), name='list_saved_jobs'),
     path('saved_candidates/<int:job_post_id>/', ListSavedCandidatesView.as_view(), name='list_saved_candidates'),
 
+    path('contact/', ContactFormView.as_view(), name='contact_form')
 
 ]

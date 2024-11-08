@@ -67,6 +67,8 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
 }
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 ROOT_URLCONF = 'WorkNest.urls'
 
 TEMPLATES = [

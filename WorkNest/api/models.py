@@ -124,8 +124,8 @@ class RecruiterProfile(models.Model):
     testimonials = models.TextField(null=True, blank=True)  # Could also be JSONField
     
     # Hiring Preferences
-    employment_types = models.ManyToManyField('EmploymentType', blank=True, null = True)
-    job_locations = models.ManyToManyField('JobLocation', blank=True,null = True)
+    employment_types = models.ManyToManyField('EmploymentType')
+    job_locations = models.ManyToManyField('JobLocation')
     visa_sponsorship = models.BooleanField(default=False)
 
     class Meta:

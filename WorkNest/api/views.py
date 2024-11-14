@@ -699,7 +699,7 @@ class ContactFormView(APIView):
             user_name = serializer.data.get('user_name')
             email = serializer.data.get('email')
             message = serializer.data.get('message')
-            print(env('EMAIL_HOST_USER'),'nimesh', env('EMAIL_HOST_PASSWORD'))
+            # print(env('EMAIL_HOST_USER'),'nimesh', env('EMAIL_HOST_PASSWORD'))
             
             subject = f"New Contact Form Submission from {user_name}"
             email_message = f"Name: {user_name}\nEmail: {email}\nMessage: {message}"
